@@ -56,7 +56,7 @@
           return response.json();
         }
         getData('https://cuaca-gempa-rest-api.vercel.app/quake').then((data) => {
-          document.querySelector('#inf').insertAdjacentHTML('beforeend', `<br><h4 class="is-marginless">Update Terakhir</h4><p>Tanggal ${data.data.tanggal}, Jam ${data.data.jam}</p><h4 class="is-marginless">Informasi Gempa</h4> <p class="text-justify">${data.data.wilayah} (${data.data.lintang}, ${data.data.bujur}), pada kedalaman ${data.data.kedalaman} dengan magnitudo ${data.data.magnitude} SR.<br>Dapat dirasakan di ${data.data.dirasakan}<br>${data.data.potensi}</p>`);
+          document.querySelector('#inf').insertAdjacentHTML('beforeend', `<br><h4 class="is-marginless">Update Terakhir</h4><p>${data.data.tanggal}, Jam ${data.data.jam}</p><h4 class="is-marginless">Informasi Gempa</h4> <p class="text-justify">${data.data.wilayah} (${data.data.lintang}, ${data.data.bujur}), pada kedalaman ${data.data.kedalaman} dengan magnitudo ${data.data.magnitude} SR.<br>Dapat dirasakan di ${data.data.dirasakan}<br>${data.data.potensi}</p>`);
         });
         let d = new Date();
         document.querySelector('#ws').innerHTML = d.toLocaleString();
