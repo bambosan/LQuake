@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lquake</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+    <style>
+        :root{ font-family: 'Open Sans' }
+        body{ margin: 0; padding: 0 }
+        #contain{
+            margin: 0;
+            padding: 20px;
+            height: 100vh;
+            background-color: #1a1d22;
+            color: #abb2bf;
+        }
+    </style>
+</head>
+<body>
+    <div id="contain">
+        <h1 style="margin: 0">LQuake</h1>
+        <br>
+        <h4 style="margin: 0; padding-left: 1px">Waktu setempat</h4>
+        <span id="ws" style="display: block; padding-bottom: 1em;"></span>
+    </div>
+    <script>
+        async function getData(url = '') {
+            const response = await fetch(url, {
+                method: 'GET', // *GET, POST, PUT, DELETE, etc.
+                mode: 'cors', // no-cors, *cors, same-origin
+                cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                credentials: 'same-origin', // include, *same-origin, omit
+            });
+            return response.json();
+        }
+        getData('https://cuaca-gempa-rest-api.vercel.app/quake').then((data) => {
+            document.querySelector('#contain').insertAdjacentHTML('beforeend',`<table> <tbody style='margin: 0; padding: 0'> <tr> <td><h4 style='margin: 0; padding: 0'>Update Terakhir</h4></td> </tr> <tr> <td>Tanggal</td> <td>:</td> <td>${data.data.tanggal}</td> </tr> <tr> <td>Jam</td> <td>:</td> <td>${data.data.jam}</td> </tr> <tr> <td><br/></td> </tr> <tr> <td><h4 style='margin: 0; padding: 0'>Informasi Gempa</h4></td> </tr> <tr> <td>Wilayah</td> <td>:</td> <td>${data.data.wilayah}</td> </tr> <tr> <td>Koordinat</td> <td>:</td> <td>${data.data.lintang}, ${data.data.bujur}</td> </tr> <tr> <td>Kedalaman</td> <td>:</td> <td>${data.data.kedalaman}</td> </tr> <tr> <td>Magnitude</td> <td>:</td> <td>${data.data.magnitude}</td> </tr> <tr> <td>Dirasakan</td> <td>:</td> <td>${data.data.dirasakan}</td> </tr> <tr> <td>Potensi</td> <td>:</td> <td>${data.data.potensi}</td> </tr> </tbody> </table>`);
+        });
+        let d = new Date();
+        document.querySelector('#ws').innerHTML = d.toLocaleString();
+        setInterval(function(){
+            d = new Date();
+            document.querySelector('#ws').innerHTML = d.toLocaleString();
+        }, 1000);
+    </script>
+</body>
+
+</html>
