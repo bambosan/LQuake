@@ -35,6 +35,7 @@
 <body>
   <div class="row is-marginless is-center">
     <div class="col-9">
+      <br>
       <h1 class="is-marginless">LQuake</h1>
       <br>
       <h4 class="is-marginless">Waktu setempat</h4>
@@ -55,9 +56,7 @@
           return response.json();
         }
         getData('https://cuaca-gempa-rest-api.vercel.app/quake').then((data) => {
-          document.querySelector('#inf').insertAdjacentHTML('beforeend', `<br><h4 class="is-marginless">Update Terakhir</h4><span>Tanggal ${data.data.tanggal}, Jam ${data.data.jam}</span><br>`);
-
-          document.querySelector('#inf').insertAdjacentHTML('beforeend', `<br><h4 class="is-marginless">Informasi Gempa</h4> <span>${data.data.wilayah} (${data.data.lintang}, ${data.data.bujur})<br>pada kedalaman ${data.data.kedalaman} dengan magnitudo ${data.data.magnitude} SR.<br> Dapat dirasakan di ${data.data.dirasakan}.<br>${data.data.potensi}</span>`);
+          document.querySelector('#inf').insertAdjacentHTML('beforeend', `<br><h4 class="is-marginless">Update Terakhir</h4><p>Tanggal ${data.data.tanggal}, Jam ${data.data.jam}</p><h4 class="is-marginless">Informasi Gempa</h4> <p class="text-justify">${data.data.wilayah} (${data.data.lintang}, ${data.data.bujur}), pada kedalaman ${data.data.kedalaman} dengan magnitudo ${data.data.magnitude} SR.<br>Dapat dirasakan di ${data.data.dirasakan}<br>${data.data.potensi}</p>`);
         });
         let d = new Date();
         document.querySelector('#ws').innerHTML = d.toLocaleString();
